@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">PhoneAuthentication</string>
+    <string-array name="number_array">
+        <item>+91</item>
+        <item>+1</item>
+    </string-array>
+</resources>
