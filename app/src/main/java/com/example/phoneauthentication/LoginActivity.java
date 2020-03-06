@@ -1,6 +1,7 @@
 package com.example.phoneauthentication;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -42,11 +43,24 @@ public class LoginActivity extends AppCompatActivity {
 
     private Spinner spinner;
 
-    public String cc;
     public String pn;
     public String complete_pn;
 
+    static final int PICK_CONTACT_REQUEST = 1;
+
     private PhoneAuthProvider.OnVerificationStateChangedCallbacks mCallbacks;
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode == PICK_CONTACT_REQUEST){
+            if(resultCode == RESULT_CANCELED)
+            {
+                mGenerateOtp.setEnabled(true);
+                mProgressBar.setVisibility(View.INVISIBLE);
+            }
+        }
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,32 +74,12 @@ public class LoginActivity extends AppCompatActivity {
         mGenerateOtp = (Button) findViewById(R.id.generateOtp);
         mProgressBar = (ProgressBar) findViewById(R.id.progressBar);
         mErrTextView = (TextView) findViewById(R.id.errTextView);
-        spinner = (Spinner) findViewById(R.id.spinner);
 
-        /*ArrayList<String> arrayList = new ArrayList<>();
-        arrayList.add("+91");
-        arrayList.add("+1");*/
-
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(LoginActivity.this,R.array.number_array,android.R.layout.simple_spinner_item);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinner.setAdapter(adapter);
-
-        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                cc = parent.getItemAtPosition(position).toString();
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-                cc = "+91";
-            }
-        });
         mGenerateOtp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 pn = mPhoneNumber.getText().toString();
-                complete_pn = cc + "" + pn;
+                complete_pn = "+91" + pn;
                 if(pn.isEmpty()){
                     mErrTextView.setVisibility(View.VISIBLE);
                     mErrTextView.setText("Please Fill in the form to Continue");
@@ -119,11 +113,13 @@ public class LoginActivity extends AppCompatActivity {
                 Log.e("Firebase error", e.getMessage());
             }
 
+
+
             @Override
             public void onCodeSent(final String s, PhoneAuthProvider.ForceResendingToken forceResendingToken) {
                 super.onCodeSent(s, forceResendingToken);
 
-                new android.os.Handler().postDelayed(
+                /*new android.os.Handler().postDelayed(
                         new Runnable() {
                             @Override
                             public void run() {
@@ -132,9 +128,14 @@ public class LoginActivity extends AppCompatActivity {
                                 startActivity(otpintent);
                             }
                         }
-                ,1000);
+                ,1000);*/
+                Intent otpintent = new Intent(LoginActivity.this,OtpActivity.class);
+                otpintent.putExtra("AuthCredentials",s);
+                startActivityForResult(otpintent,PICK_CONTACT_REQUEST);
             }
         };
+
+
     }
 
     @Override

@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".MainActivity"
+    android:background="@color/colorPrimary">
 
     <TextView
         android:id="@+id/textView"
@@ -12,6 +13,7 @@
         android:layout_height="wrap_content"
         android:fontFamily="@font/yesteryear"
         android:text="Welcome User"
+        android:textColor="@android:color/white"
         android:textSize="50sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"

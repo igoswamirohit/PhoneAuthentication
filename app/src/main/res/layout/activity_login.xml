@@ -4,23 +4,28 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorPrimaryDark"
     tools:context=".LoginActivity">
+
 
     <EditText
         android:id="@+id/phoneNumber"
-        android:layout_width="234dp"
-        android:layout_height="52dp"
-        android:layout_marginTop="252dp"
+        android:layout_width="0dp"
+        android:layout_height="57dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="256dp"
         android:layout_marginEnd="32dp"
+        android:backgroundTint="#00bfa5"
         android:ems="10"
         android:fontFamily="@font/open_sans"
         android:hint="Your Phone Number"
         android:inputType="phone"
-        android:textSize="24sp"
+        android:textColorHint="@android:color/white"
+        android:textColor="@android:color/white"
+        android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
-
 
     <Button
         android:id="@+id/generateOtp"
@@ -44,8 +49,8 @@
         android:layout_width="24dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
-        android:visibility="invisible"
         android:indeterminateTint="@android:color/white"
+        android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="@+id/generateOtp"
         app:layout_constraintEnd_toEndOf="@+id/generateOtp"
         app:layout_constraintTop_toTopOf="@+id/generateOtp" />
@@ -56,23 +61,14 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="40dp"
         android:layout_marginEnd="40dp"
-        android:text="TextView"
         android:gravity="center"
-        android:visibility="invisible"
+        android:text="TextView"
         android:textSize="24sp"
+        android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/generateOtp" />
 
-    <Spinner
-        android:id="@+id/spinner"
-        android:layout_width="102dp"
-        android:layout_height="52dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="252dp"
-        android:layout_marginEnd="4dp"
-        app:layout_constraintEnd_toStartOf="@+id/phoneNumber"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
